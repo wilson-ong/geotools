@@ -2343,6 +2343,14 @@
       <url>https://repo.boundlessgeo.com/main/</url>
     </repository>
 
+    <!-- Many of the packages already removed from Central Maven Repository -->
+    <!-- Substitute with this online random found repo. -->
+    <repository>
+      <id>nexus</id>
+      <name>nexus</name>
+      <url>https://repo.b3p.nl/nexus/repository/public</url>
+    </repository>
+
   </repositories>
 
   <!-- =========================================================== -->
