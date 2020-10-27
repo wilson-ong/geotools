@@ -1,42 +1,28 @@
-![GeoTools logo](/geotools-logo.png)
-
-[GeoTools](http://geotools.org) is an open source Java library that provides
- tools for geospatial data. Our Users guide provides an [overview](http://docs.geotools.org/stable/userguide/geotools.html) of the core features, supported formats and standards support.
-
-## License
-
-GeoTools is licensed under the [LGPL](http://www.gnu.org/licenses/lgpl.html). The user guide [license](http://docs.geotools.org/stable/userguide/welcome/license.html) page describes the less restrictive license for documentation and source code examples.
-
-## Contributing
-
-The developers guide outlines ways to [contribute ](http://docs.geotools.org/stable/developer/procedures/contribute.html) to GeoTools using patches, pull requests and setting up new modules.
-
-If you are already experienced with GitHub please check our [pull request](http://docs.geotools.org/stable/developer/procedures/pull_requests.html) page before you start!
+# debug-geoserver-2.16.0
+Branch out to debug geoserver 2.16.0 issue.
 
 ## Building
 
-GeoTools uses [Apache Maven](http://maven.apache.org/) for a build system. To 
-build the library run maven from the root of the repository.
+Download [Apache Maven](http://maven.apache.org/) and [JDK 1.8](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
 
-    % mvn clean install
+To build the library run maven from the root of the repository.
 
-See the [user guide](http://docs.geotools.org/stable/userguide/build/index.html) 
-for more details.
+    % mvn install -DskipTests -Drelease 
+    
+### Install
+Copy the `*-22.0.jar` from `$USER_HOME/.m2` on your device to `$CATALINA_HOME/webapps/geoserver/WEB-INF/lib` on server.
 
-## Bugs
+## Logging for debug
+### [Optional] Enable detailed logging output in geoserver
+From geoserver web UI, go to `Settings/Global` and select *verbose* debugging profile, 
+then change all the log levels in `${GEOSERVER_DATA_DIR}/logs/VERBOSE_LOGGING.properties` to `ALL`.
 
-GeoTools uses [JIRA](https://osgeo-org.atlassian.net/browse/GEOT), hosted by 
-[Atlassian](https://www.atlassian.com/), for issue tracking.
 
-## Mailing Lists
+### Insert logging in code
+1. Make sure `LOGGER` is declared on class level.
+2. Use `LOGGER.warning("Testing")` to log.
+ 
+### Read log output
+If you did not enable detailed logging output in geoserver Use `tail -f ${CATALINA_HOME}/logs/catalina.out` to read the output.
 
-The [user list](mailto:geotools-gt2-users@lists.sourceforge.net) is for all questions 
-related to GeoTools usage. 
-
-The [dev list](mailto:geotools-devel@lists.sourceforge.net) is for questions related 
-to hacking on the GeoTools library itself.
-
-## More Information
-
-Visit the [website](http://geotools.org/) or read the [docs](http://docs.geotools.org/). 
-
+Else you can find the log file at `${GEOSERVER_DATA_DIR}/logs/geoserver.log`.
